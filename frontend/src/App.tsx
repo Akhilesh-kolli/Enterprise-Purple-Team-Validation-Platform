@@ -35,6 +35,7 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { alpha } from '@mui/material/styles';
+import api, { setApiToken } from './services/api';
 
 type TokenResponse = {
   access_token: string;
@@ -73,9 +74,6 @@ type ApiState<T> = {
 const TOKEN_KEY = 'purple-team-session';
 const drawerWidth = 280;
 
-const api = axios.create({
-  baseURL: '/api/v1',
-});
 
 const theme = createTheme({
   palette: {
@@ -688,12 +686,12 @@ function App() {
 
   useEffect(() => {
     if (session?.accessToken) {
-      api.defaults.headers.common.Authorization = `Bearer ${session.accessToken}`;
+      setApiToken(session.accessToken);
       saveSession(session);
       return;
     }
 
-    delete api.defaults.headers.common.Authorization;
+    setApiToken(null);
     saveSession(null);
   }, [session]);
 
