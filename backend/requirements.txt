@@ -1,0 +1,29 @@
+fastapi==0.109.2
+uvicorn[standard]==0.27.0
+sqlalchemy==2.0.25
+alembic==1.13.1
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+pyjwt==2.8.1
+passlib[argon2]==1.7.4
+python-multipart==0.0.6
+structlog==24.1.0
+celery==5.3.4
+redis==5.0.1
+psycopg2-binary==2.9.9
+httpx==0.25.2
+requests==2.31.0
+
+# Development
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+black==23.12.1
+isort==5.13.2
+flake8==6.1.0
+mypy==1.7.1
+pre-commit==3.5.0
+
+# Production
+gunicorn==21.2.0
