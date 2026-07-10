@@ -2,6 +2,7 @@
 User service - business logic layer.
 """
 from datetime import timedelta
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from domain.models.user import User, UserRole, AuditLog
 from domain.repositories.user_repository import UserRepository, AuditLogRepository
@@ -45,8 +46,15 @@ class UserService:
             is_active=True,
         )
         
-        await self.repository.create(user)
-        await self.session.commit()
+        try:
+            await self.repository.create(user)
+            await self.session.commit()
+        except IntegrityError:
+            await self.session.rollback()
+            raise ConflictError("Username or email is already registered")
+        except Exception:
+            await self.session.rollback()
+            raise
         
         logger.info("user_registered", username=username, email=email)
         return user

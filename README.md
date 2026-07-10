@@ -240,6 +240,14 @@ Authorization: Bearer <access_token>
 
 - `GET /api/v1/health` - System health (database, Redis, version)
 
+### Asset Management (Phase 4)
+
+- `GET /api/v1/assets` - List all assets
+- `GET /api/v1/assets/{id}` - Get asset details
+- `POST /api/v1/assets` - Create asset
+- `PUT /api/v1/assets/{id}` - Update asset
+- `DELETE /api/v1/assets/{id}` - Delete asset
+
 ---
 
 ## Database Schema (Phase 1)

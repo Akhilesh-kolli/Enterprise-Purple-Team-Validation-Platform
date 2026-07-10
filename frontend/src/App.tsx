@@ -36,6 +36,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { alpha } from '@mui/material/styles';
 import api, { setApiToken } from './services/api';
+import AssetsPage from './pages/AssetsPage';
 
 type TokenResponse = {
   access_token: string;
@@ -669,7 +670,7 @@ function Shell({ session, onLogout }: { session: Session; onLogout: () => void }
       <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 12 }}>
         <Routes>
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/assets" element={<CollectionPage title="Assets" endpoint="/assets" description="Inventory data from the backend asset API." />} />
+          <Route path="/assets" element={<AssetsPage />} />
           <Route path="/attack-execution" element={<CollectionPage title="Attack Execution" endpoint="/executions" description="Execution records returned by the backend." />} />
           <Route path="/detection-results" element={<CollectionPage title="Detection Results" endpoint="/detections" description="Detection validation results from the backend." />} />
           <Route path="/reports" element={<CollectionPage title="Reports" endpoint="/reports" description="Generated reports returned by the backend." />} />

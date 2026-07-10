@@ -7,9 +7,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from app.config import settings
 from app.logging import configure_logging, get_logger
-from app.database import engine
+from app.database import AsyncSessionLocal, engine
 from domain.models.base import Base
-from api.v1.routes import auth, health
+from domain.services.asset_service import AssetService
+from api.v1.routes import assets, auth, dashboard, executions, health
 
 logger = get_logger(__name__)
 
@@ -25,6 +26,10 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.create_all)
     
     logger.info("database_initialized")
+
+    async with AsyncSessionLocal() as session:
+        service = AssetService(session)
+        await service.seed_assets_if_empty()
     
     yield
     
@@ -61,6 +66,9 @@ def create_app() -> FastAPI:
     
     # Include routers
     app.include_router(auth.router, prefix="/api/v1")
+    app.include_router(assets.router, prefix="/api/v1")
+    app.include_router(dashboard.router, prefix="/api/v1")
+    app.include_router(executions.router, prefix="/api/v1")
     app.include_router(health.router, prefix="/api/v1")
     
     @app.get("/")

@@ -1,6 +1,6 @@
 """
 Package initialization for routes.
 """
-from . import auth, health
+from . import assets, auth, dashboard, executions, health
 
-__all__ = ["auth", "health"]
+__all__ = ["assets", "auth", "dashboard", "executions", "health"]
