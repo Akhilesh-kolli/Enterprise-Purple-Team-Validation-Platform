@@ -11,12 +11,15 @@ from .auth import (
     UserResponse,
 )
 from .dashboard import DashboardSummaryResponse, LatestExecutionResponse
+from .execution import ExecutionCreateRequest, ExecutionResponse
 
 __all__ = [
     "AssetCreate",
     "AssetResponse",
     "AssetUpdate",
     "DashboardSummaryResponse",
+    "ExecutionCreateRequest",
+    "ExecutionResponse",
     "HealthCheckResponse",
     "LatestExecutionResponse",
     "LoginRequest",

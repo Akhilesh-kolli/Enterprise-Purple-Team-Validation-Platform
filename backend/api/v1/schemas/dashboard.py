@@ -7,16 +7,19 @@ from pydantic import BaseModel
 
 
 class LatestExecutionResponse(BaseModel):
-    """Latest execution/activity entry for dashboard surfaces."""
+    """Latest execution entry for dashboard and execution surfaces."""
 
     id: int
-    user_id: int
-    username: str | None = None
-    action: str
-    resource_type: str
-    resource_id: str | None = None
+    execution_name: str
+    attack_type: str
+    target_asset: str
     status: str
-    created_at: datetime
+    progress: int
+    findings_count: int
+    severity: str | None = None
+    started_at: datetime | None = None
+    completed_at: datetime | None = None
+    created_by: str
 
 
 class DashboardSummaryResponse(BaseModel):
@@ -26,3 +29,7 @@ class DashboardSummaryResponse(BaseModel):
     executed_tests: int
     detection_success_rate: float
     latest_executions: list[LatestExecutionResponse]
+    running_executions: int = 0
+    completed_executions: int = 0
+    failed_executions: int = 0
+    latest_execution: LatestExecutionResponse | None = None

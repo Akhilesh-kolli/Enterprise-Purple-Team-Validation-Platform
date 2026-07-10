@@ -248,6 +248,14 @@ Authorization: Bearer <access_token>
 - `PUT /api/v1/assets/{id}` - Update asset
 - `DELETE /api/v1/assets/{id}` - Delete asset
 
+### Attack Execution (Phase 5)
+
+- `GET /api/v1/executions` - List executions
+- `GET /api/v1/executions/{id}` - Get execution details
+- `POST /api/v1/executions` - Create and start execution
+- `DELETE /api/v1/executions/{id}` - Delete execution
+- `GET /api/v1/executions/latest` - Latest execution updates (for polling)
+
 ---
 
 ## Database Schema (Phase 1)

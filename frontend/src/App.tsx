@@ -37,6 +37,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { alpha } from '@mui/material/styles';
 import api, { setApiToken } from './services/api';
 import AssetsPage from './pages/AssetsPage';
+import AttackExecutionPage from './pages/AttackExecutionPage';
 
 type TokenResponse = {
   access_token: string;
@@ -127,7 +128,7 @@ const theme = createTheme({
 const navItems = [
   { label: 'Dashboard', path: '/dashboard', icon: <DashboardIcon /> },
   { label: 'Assets', path: '/assets', icon: <Inventory2OutlinedIcon /> },
-  { label: 'Attack Execution', path: '/attack-execution', icon: <PlayCircleOutlineIcon /> },
+  { label: 'Attack Execution', path: '/attack', icon: <PlayCircleOutlineIcon /> },
   { label: 'Detection Results', path: '/detection-results', icon: <FactCheckOutlinedIcon /> },
   { label: 'Reports', path: '/reports', icon: <DescriptionOutlinedIcon /> },
   { label: 'Settings', path: '/settings', icon: <SettingsOutlinedIcon /> },
@@ -671,7 +672,8 @@ function Shell({ session, onLogout }: { session: Session; onLogout: () => void }
         <Routes>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/assets" element={<AssetsPage />} />
-          <Route path="/attack-execution" element={<CollectionPage title="Attack Execution" endpoint="/executions" description="Execution records returned by the backend." />} />
+          <Route path="/attack" element={<AttackExecutionPage />} />
+          <Route path="/attack-execution" element={<Navigate to="/attack" replace />} />
           <Route path="/detection-results" element={<CollectionPage title="Detection Results" endpoint="/detections" description="Detection validation results from the backend." />} />
           <Route path="/reports" element={<CollectionPage title="Reports" endpoint="/reports" description="Generated reports returned by the backend." />} />
           <Route path="/settings" element={<SettingsPage session={session} />} />
